@@ -1,0 +1,37 @@
+{
+  "name": "node_mysql2_mariadb_examples",
+  "version": "1.0.0",
+  "description": "These are examples that use node.js with the mariadb database and the mysql2 npm module",
+  "keywords": [
+    "Node.js",
+    "mariadb",
+    "express",
+    "editarea"
+  ],
+  "author": {
+    "name": "Rich Hildred",
+    "email": "rhildred@gmail.com",
+    "url": "http://syndicateme.net/"
+  },
+  "homepage": "https://github.com/rhildred/js-toolbox/tree/master/render-async",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhildred/js-toolbox.git"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "js-toolbox": "*",
+    "assert-runner": "*",
+    "mysql2": "*",
+    "render-async": "*"
+  },
+  "scripts": {
+	    "test": "./test.js"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "main": "TestRunner.js"
+}
