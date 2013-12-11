@@ -28,7 +28,7 @@ form {
 jQuery("document").ready(function(){
 	jQuery("#searchForm").submit(function(){
 		var oData = jQuery("#searchForm").serialize();
-		jQuery.ajax({url: "/johnyDrop", data: oData, type: 'POST'}).done(function(oStudents){
+		jQuery.ajax({url: "/johnyDrop", data: oData}).done(function(oStudents){
 			jQuery("#results").html("");
 			console.log(oStudents);
 			jQuery.each(oStudents, function(skey, oValue){

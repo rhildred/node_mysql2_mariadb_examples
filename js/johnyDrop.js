@@ -3,8 +3,7 @@ var mysql = require('mysql2'), connection = mysql.createConnection({
 	database : 'test2'
 });
 module.exports.johnyDrop = function(req, res, next, callback) {
-	var sName = req.param('q') || req.body.q || '%';
-	console.log(sName);
+	var sName = req.param('q') || '%';
 	var sSQL = "SELECT * FROM students WHERE name like '%" + sName + "%'";
 	console.log(sSQL);
 	connection.query(sSQL, function(err, rows) {
