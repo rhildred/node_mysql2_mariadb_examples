@@ -3,15 +3,18 @@ assert = require('assert'),
 renderAsync = require('render-async'),
 renderFile = renderAsync.__express,
 jQuery = require('js-toolbox')._jQuery,
+express = require('express'),
 johnyDrop = require('./js/johnyDrop.js').johnyDrop;
 
 //now we need a server for this so that we can test include
 var app= renderAsync.express();
+app.use(express.bodyParser());
 app.set('views', __dirname + '/public');
 
 // add a route for Johny Drop table
 
 app.get("/johnyDrop", function(req, res){johnyDrop(req, res);});
+app.post("/johnyDrop", function(req, res){johnyDrop(req, res);});
 
 
 //server everything index.html welcome file

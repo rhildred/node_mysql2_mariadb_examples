@@ -26,7 +26,8 @@
     "js-toolbox": "*",
     "assert-runner": "*",
     "mysql2": "*",
-    "render-async": "*"
+    "render-async": "*",
+    "express": "*"
   },
   "scripts": {
 	    "test": "./test.js"
