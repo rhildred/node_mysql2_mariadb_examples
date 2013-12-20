@@ -1,8 +1,6 @@
 var TestRunner = require('assert-runner'),
 assert = require('assert'),
 renderAsync = require('render-async'),
-renderFile = renderAsync.__express,
-jQuery = require('js-toolbox')._jQuery,
 johnyDrop = require('./js/johnyDrop.js').johnyDrop;
 
 //now we need a server for this so that we can test include
