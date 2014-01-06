@@ -3,7 +3,8 @@ assert = require('assert'),
 renderAsync = require('render-async'),
 renderFile = renderAsync.__express,
 jQuery = require('js-toolbox')._jQuery,
-johnyDrop = require('./js/johnyDrop.js').johnyDrop;
+johnyDrop = require('./js/johnyDrop.js').johnyDrop,
+babySleep = require('./js/babySleep.js').babySleep;
 
 //now we need a server for this so that we can test include
 var app= renderAsync.express();
@@ -12,6 +13,10 @@ app.set('views', __dirname + '/public');
 // add a route for Johny Drop table
 
 app.get("/johnyDrop", function(req, res){johnyDrop(req, res);});
+
+//add a route for babySleep table
+
+app.get("/babySleep", function(req, res){babySleep(req, res);});
 
 //server everything index.html welcome file
 app.use(renderAsync.webServer);

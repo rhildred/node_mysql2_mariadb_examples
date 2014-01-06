@@ -1,7 +1,8 @@
 var TestRunner = require('assert-runner'),
 assert = require('assert'),
 mysql = require('mysql2'),
-johnyDrop = require('./js/johnyDrop.js').johnyDrop;
+johnyDrop = require('./js/johnyDrop.js').johnyDrop,
+babySleep = require('./js/babySleep.js').babySleep;
 
 var tests = {
 	"Test of nothing": function(){
@@ -28,12 +29,10 @@ var tests = {
 		});
 	},
 	"Test of Johny drop with SQL injection": function(done){
-		//surprisingly this is still caught by mysql2 node driver???? but not by the mysql
 		var req = new TestRunner.TestRequest();
 		req.params['q'] = "Johny';DROP TABLE test2;#";
 		var res = new TestRunner.TestResponse();
 		johnyDrop(req, res, null, function(err){
-			console.log(err);
 			connection = mysql.createConnection({
 				user : 'root',
 				database : 'test2'
@@ -43,6 +42,16 @@ var tests = {
 				done();				
 			});
 		});
+	},
+	"Test of Baby Sleep stored procedure": function(done){
+		var req = new TestRunner.TestRequest();
+		req.params['q'] = "Johny';DROP TABLE test2;#";
+		var res = new TestRunner.TestResponse();
+		babySleep(req, res, null, function(err){
+			assert(err == null);
+			done();				
+		});
+		
 	}
 		
 };

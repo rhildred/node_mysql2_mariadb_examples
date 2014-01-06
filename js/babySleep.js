@@ -2,16 +2,14 @@ var mysql = require('mysql2'), connection = mysql.createConnection({
 	user : 'root',
 	database : 'test2'
 });
-module.exports.johnyDrop = function(req, res, next, callback) {
+module.exports.babySleep = function(req, res, next, callback) {
 	var sName = req.param('q') || '%';
-	var sSQL = "SELECT * FROM students WHERE name like CONCAT('%', ?, '%')";
-	console.log(sSQL);
-	connection.query(sSQL, [sName], function(err, rows) {
+	connection.query('CALL babysleepsum()', function(err, rows) {
 		if (err && callback)
 			callback(err);
 		// now we want the rows
 		res.setHeader("Content-Type", "application/json");
-		res.end(JSON.stringify(rows));
+		res.end(JSON.stringify(rows[0]));
 		if (callback)
 			callback(null);
 	});

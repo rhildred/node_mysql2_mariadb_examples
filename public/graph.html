@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Baby Sleeps Graph</title>
+</head>
+<body>
+<h1>Baby Sleeps Graph</h1>
+<canvas id="graph" width="600" height="400">  
+</canvas>
+</body>
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+var graph;
+var xPadding = 30;
+var yPadding = 30;
+
+var data = {};
+
+function getMaxY() {
+	var max = 0;
+
+	for(var i = 0; i < data.values.length; i ++) {
+		if(data.values[i].duration > max) {
+			max = data.values[i].duration;
+		}
+	}
+
+	return max;
+}
+
+function getXPixel(val) {
+	return ((graph.width() - xPadding) / data.values.length) * val + (xPadding * 1.5);
+}
+
+function getYPixel(val) {
+	return graph.height() - (((graph.height() - yPadding) / getMaxY()) * val) - yPadding;
+}
+
+function getGraph(sQuery)
+{
+	jQuery.getJSON( sQuery ).done( function( results ) {
+			data.values = results;
+			graph = jQuery('#graph');
+			var c = graph[0].getContext('2d');
+			c.lineWidth = 2;
+			c.strokeStyle = '#333';
+			c.font = 'italic 8pt sans-serif';
+			c.textAlign = "center";
+			c.beginPath();
+			c.moveTo(xPadding, 0);
+			c.lineTo(xPadding, graph.height() - yPadding);
+			c.lineTo(graph.width(), graph.height() - yPadding);
+			c.stroke();
+			for(var i = 0; i < data.values.length; i ++) {
+			c.fillText(data.values[i].sleepday, getXPixel(i), graph.height() - yPadding + 20);
+			}
+			c.textAlign = "right"
+			c.textBaseline = "middle";
+
+			for(var i = 0; i < getMaxY(); i += 20) {
+			c.fillText(i, xPadding - 10, getYPixel(i));
+			}
+			c.strokeStyle = '#f00';
+			c.beginPath();
+			c.moveTo(getXPixel(0), getYPixel(data.values[0].duration));
+
+			for(var i = 1; i < data.values.length; i ++) {
+				c.lineTo(getXPixel(i), getYPixel(data.values[i].duration));
+			}
+			c.stroke()
+				c.fillStyle = '#333';
+
+			for(var i = 0; i < data.values.length; i ++) { 
+				c.beginPath();
+				c.arc(getXPixel(i), getYPixel(data.values[i].duration), 4, 0, Math.PI * 2, true);
+				c.fill();
+			}
+	}).fail(function( jqxhr, textStatus, error ) {
+		var err = textStatus + ', ' + error;
+		console.log( "Request Failed: " + err + ": Response Text: " + jqxhr.responseText);
+		});
+}
+getGraph("/babySleep");
+
+</script>
+</html>
