@@ -1,8 +1,7 @@
 var TestRunner = require('assert-runner'),
 assert = require('assert'),
 mysql = require('mysql2'),
-johnyDrop = require('./js/johnyDrop.js').johnyDrop,
-babySleep = require('./js/babySleep.js').babySleep;
+johnyDrop = require('./js/johnyDrop.js').johnyDrop;
 
 var tests = {
 	"Test of nothing": function(){
@@ -42,18 +41,7 @@ var tests = {
 				done();				
 			});
 		});
-	},
-	"Test of Baby Sleep stored procedure": function(done){
-		var req = new TestRunner.TestRequest();
-		req.params['q'] = "Johny';DROP TABLE test2;#";
-		var res = new TestRunner.TestResponse();
-		babySleep(req, res, null, function(err){
-			assert(err == null);
-			done();				
-		});
-		
-	}
-		
+	}	
 };
 
 new TestRunner(tests).again(0);
