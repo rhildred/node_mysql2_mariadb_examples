@@ -1,0 +1,34 @@
+<!Doctype html>
+<html>
+<head>
+</head>
+<body>
+<form id="insertForm" method="post" action="insertStudent">
+<label for="studentNum">Student Number</label><input name="studentNum" />
+<label for="first">First Name</label><input name="first" />
+<label for="last">Last Name</label><input name="last" />
+<button type="submit">Submit</button>
+</form>
+<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<script>
+jQuery("document").ready(function(){
+	jQuery("#insertForm").submit(function(){
+		var oData = jQuery(this).serialize();
+		console.log(oData);
+		jQuery.ajax({
+			url: 'insertStudent',
+			type: 'post',
+			data: oData,
+			dataType: 'json'
+		}).done(function(oResults){
+			console.log(oResults);
+		}).fail(function(err){
+			console.log(err);
+		});
+		return false;
+	});
+});
+</script>
+</body>
+</html>

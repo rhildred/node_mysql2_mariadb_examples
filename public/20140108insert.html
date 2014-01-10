@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+<body>
+<form id="student">
+<label for="first">first</label><input name="first" />
+<label for="last">last</label><input name="last" />
+<button type="submit">Submit</button>
+</form>
+<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<script>
+jQuery("document").ready(function(){
+	jQuery("#student").submit(function(){
+		var oData = jQuery(this).serialize();
+		console.log(oData);
+		jQuery.ajax({url: 'insertStudent',  type: "POST",
+			data: oData,
+			dataType: 'json'}).done(function(oResult){
+				console.log(oResult);
+			}).fail(function(err){
+				console.log(err);
+			});
+		return false;
+	});
+});
+</script>
+</body>
+</html>
